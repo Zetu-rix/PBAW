@@ -1,0 +1,52 @@
+{extends file="../templates/main.html"}
+
+{block name=content}
+
+<header>
+    <h2>Kalkulator Kredytowy</h2>
+</header>
+
+<form action="{$app_url}/app/calc.php#kalkulator" method="post">
+    <div class="row">
+        <div class="col-4 col-12-mobile">Kwota<br><input type="text" name="kwota" placeholder="10000 PLN" value="{$form['kwota']}"></div>
+        <div class="col-4 col-12-mobile">Lata<br><input type="text" name="lata" placeholder="5 lat" value="{$form['lata']}"></div>
+        <div class="col-4 col-12-mobile">Oprocentowanie<br><input type="text" name="proc" placeholder="5 = 5%" value="{$form['proc']}"></div>
+        <div class="col-12">
+            <input type="submit" value="Oblicz" />
+        </div>
+    </div>
+</form>
+
+<div>
+    {* Wyświetlenie listy błędów, jeśli istnieją *}
+    {if isset($messages)}
+        {if count($messages) > 0}
+            <h4>Wystąpiły błędy:</h4>
+            <ol class="err">
+                {foreach $messages as $msg}
+                    <li>{$msg}</li>
+                {/foreach}
+            </ol>
+        {/if}
+    {/if}
+
+    {* Wyświetlenie listy informacji, jeśli istnieją *}
+    {if isset($infos)}
+        {if count($infos) > 0}
+            <h4>Informacje:</h4>
+            <ol class="inf">
+                {foreach $infos as $msg}
+                    <li>{$msg}</li>
+                {/foreach}
+            </ol>
+        {/if}
+    {/if}
+	
+    {* Wyświetlenie wyniku, jeśli istnieje *}
+    {if isset($result)}
+        <h4>Miesięczna rata:</h4>
+        <p class="res">{$result} PLN</p>
+    // {/if}
+</div>
+
+{/block}
